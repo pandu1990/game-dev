@@ -8,17 +8,17 @@ public class Player : MonoBehaviour {
     [SerializeField] float screenHeightInUnits = 20f;
     [SerializeField] float speed = 10f;
 
-    private Rigidbody2D rb;
+    private Rigidbody2D rb2d;
     
     void Start () {
-        rb = GetComponent<Rigidbody2D>();
+        rb2d = GetComponent<Rigidbody2D>();
 	}
 	
 	void FixedUpdate () {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-        rb.velocity = (movement * speed);
+        rb2d.velocity = (movement * speed);
     }
 
     private void Update()
