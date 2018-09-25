@@ -10,13 +10,13 @@ public class GameStatus : MonoBehaviour {
     [SerializeField] int totalPoints = 0;
     [SerializeField] Text scoreText;
     [SerializeField] Text WinLoseText;
+    [SerializeField] int level = 1;
 
     public void Start()
     {
         WinLoseText.text = "";
         DisplayScore();
-        //GlobalData.Level=1;
-        PlayerPrefs.SetInt("Level", 1);
+        PlayerPrefs.SetInt("Level", level);
     }
 
     public void addToScore(int points)

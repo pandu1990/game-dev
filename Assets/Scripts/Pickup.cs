@@ -7,6 +7,7 @@ public class Pickup : MonoBehaviour {
 
     [SerializeField] TextMeshProUGUI tmproText;
     [SerializeField] int points = 0;
+    bool picked = false;
 
     GameStatus gameStatus;
 
@@ -18,8 +19,12 @@ public class Pickup : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        gameStatus.addToScore(points);
-        Destroy(gameObject);
+        if (!picked)
+        {
+            gameStatus.addToScore(points);
+            Destroy(gameObject);
+            picked = true;
+        }
     }
 
 }
