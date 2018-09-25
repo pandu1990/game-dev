@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameStatus : MonoBehaviour {
 
@@ -14,6 +15,8 @@ public class GameStatus : MonoBehaviour {
     {
         WinLoseText.text = "";
         DisplayScore();
+        //GlobalData.Level=1;
+        PlayerPrefs.SetInt("Level", 1);
     }
 
     public void addToScore(int points)
@@ -23,9 +26,12 @@ public class GameStatus : MonoBehaviour {
         {
             WinLoseText.text = "You Lose!";
             WinLoseText.color = Color.red;
-        } else if (totalPoints > 100)
+            SceneManager.LoadScene("Lose Scene");
+        } 
+        else if (totalPoints > 100)
         {
             WinLoseText.text = "You Win!";
+            SceneManager.LoadScene("Win Scene");
         }
         DisplayScore();
     }
