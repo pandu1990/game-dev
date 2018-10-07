@@ -8,13 +8,14 @@ using UnityEngine.SceneManagement;
 public class GameStatus : MonoBehaviour {
 
     [SerializeField] int totalPoints = 0;
+    [SerializeField] int targetPoints = 0;
     [SerializeField] Text scoreText;
-    [SerializeField] Text WinLoseText;
+    [SerializeField] Text targetText;
     [SerializeField] int level = 1;
+    bool playerReverseDirection = false;
 
     public void Start()
     {
-        WinLoseText.text = "";
         DisplayScore();
         PlayerPrefs.SetInt("Level", level);
     }
@@ -22,15 +23,12 @@ public class GameStatus : MonoBehaviour {
     public void addToScore(int points)
     {
         totalPoints += points;
-        if (totalPoints < 0)
+        if (totalPoints <= 0)
         {
-            WinLoseText.text = "You Lose!";
-            WinLoseText.color = Color.red;
             SceneManager.LoadScene("Lose Scene");
         } 
-        else if (totalPoints > 100)
+        else if (totalPoints >= targetPoints)
         {
-            WinLoseText.text = "You Win!";
             SceneManager.LoadScene("Win Scene");
         }
         DisplayScore();
@@ -38,6 +36,24 @@ public class GameStatus : MonoBehaviour {
 
     private void DisplayScore()
     {
-        scoreText.text = totalPoints.ToString();
+        scoreText.text = "Score: \n" + totalPoints.ToString();
+        targetText.text = "Target: \n" + targetPoints.ToString();
+    }
+
+    public void ReverseDirection()
+    {
+        if (playerReverseDirection)
+        {
+            playerReverseDirection = false;
+        } 
+        else
+        {
+            playerReverseDirection = true;
+        }
+    }
+
+    public bool PlayerReverseDirection()
+    {
+        return playerReverseDirection;
     }
 }
