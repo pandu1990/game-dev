@@ -13,7 +13,7 @@ public class Mystery : MonoBehaviour {
         gameStatus = FindObjectOfType<GameStatus>();
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!picked)
         {
