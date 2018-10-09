@@ -13,6 +13,7 @@ public class GameStatus : MonoBehaviour {
     [SerializeField] Text targetText;
     [SerializeField] int level = 1;
     bool playerReverseDirection = false;
+    bool playerSpeedUp = false;
 
     public void Start()
     {
@@ -55,5 +56,15 @@ public class GameStatus : MonoBehaviour {
     public bool PlayerReverseDirection()
     {
         return playerReverseDirection;
+    }
+
+    public void SpeedUp()
+    {
+        playerSpeedUp = playerSpeedUp == true ? false : true;
+    }
+
+    public bool PlayerSpeedUp()
+    {
+        return playerSpeedUp;
     }
 }

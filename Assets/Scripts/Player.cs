@@ -19,6 +19,8 @@ public class Player : MonoBehaviour {
 	
     void FixedUpdate () {
         int direction = gameStatus.PlayerReverseDirection()? -1: 1;
+        int accelerate = gameStatus.PlayerSpeedUp() ? 2 : 1;
+
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
@@ -27,18 +29,20 @@ public class Player : MonoBehaviour {
             movement.Normalize();
         }
         movement *= Time.deltaTime;
-        rb2d.AddForce(movement * speed * direction);
+        rb2d.AddForce(movement * speed * direction * accelerate);
     }
 
     private void Update()
     {
         int direction = gameStatus.PlayerReverseDirection() ? -1 : 1;
+        int accelerate = gameStatus.PlayerSpeedUp() ? 2 : 1;
+
         var movement = new Vector2 (Input.acceleration.x, Input.acceleration.y) - startXY;
         if (movement.sqrMagnitude > 1)
         {
             movement.Normalize();
         }
         movement *= Time.deltaTime;
-        rb2d.AddForce(movement * speed * direction);
+        rb2d.AddForce(movement * speed * direction * accelerate);
     }
 }

@@ -8,6 +8,14 @@ public class Mystery : MonoBehaviour {
 
     GameStatus gameStatus;
 
+
+    enum MYSTERYDIRECTION{ 
+        ReverseDirection,
+        SpeedUp
+    };
+
+    [SerializeField] MYSTERYDIRECTION mysteryType;
+
     public void Start()
     {
         gameStatus = FindObjectOfType<GameStatus>();
@@ -17,7 +25,14 @@ public class Mystery : MonoBehaviour {
     {
         if (!picked)
         {
-            gameStatus.ReverseDirection();
+            if(mysteryType==MYSTERYDIRECTION.ReverseDirection)
+            {
+                gameStatus.ReverseDirection();
+            }
+            else if (mysteryType == MYSTERYDIRECTION.SpeedUp)
+            {
+                gameStatus.SpeedUp();
+            }
             Destroy(gameObject);
             picked = true;
         }
