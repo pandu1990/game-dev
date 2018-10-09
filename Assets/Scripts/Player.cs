@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 
     void Start () {
         rb2d = GetComponent<Rigidbody2D>();
+        rb2d.drag = 2;
         gameStatus = FindObjectOfType<GameStatus>();
         startXY = new Vector2(Input.acceleration.x, Input.acceleration.y);
     }
@@ -21,8 +22,12 @@ public class Player : MonoBehaviour {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-        //movement *= Time.deltaTime;
-        rb2d.velocity = (movement * speed * direction);
+        if (movement.sqrMagnitude > 1)
+        {
+            movement.Normalize();
+        }
+        movement *= Time.deltaTime;
+        rb2d.AddForce(movement * speed * direction);
     }
 
     private void Update()
@@ -34,6 +39,6 @@ public class Player : MonoBehaviour {
             movement.Normalize();
         }
         movement *= Time.deltaTime;
-        transform.Translate(movement * speed * direction);
+        rb2d.AddForce(movement * speed * direction);
     }
 }
