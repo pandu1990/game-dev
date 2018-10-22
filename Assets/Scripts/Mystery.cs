@@ -25,7 +25,7 @@ public class Mystery : MonoBehaviour {
     {
         if (!picked)
         {
-            if(mysteryType==MYSTERYDIRECTION.ReverseDirection)
+            if(mysteryType == MYSTERYDIRECTION.ReverseDirection)
             {
                 gameStatus.ReverseDirection();
             }
