@@ -37,3 +37,4 @@ sysinfo.txt
 
 #Mac specific
 *.DS_Store
+ProjectSettings/ProjectVersion.txt
