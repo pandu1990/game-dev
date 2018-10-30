@@ -6,7 +6,7 @@ using TMPro;
 public class Pickup : MonoBehaviour {
 
     [SerializeField] TextMeshProUGUI tmproText;
-    [SerializeField] int points = 0;
+    [SerializeField] public int points = 0;
     bool picked = false;
 
     GameStatus gameStatus;
