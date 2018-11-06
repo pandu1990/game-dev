@@ -31,7 +31,7 @@ public class TutorialUI : MonoBehaviour {
         ActivateScreen(currentScreen + 1);
     }
     void ActivateScreen(int screen){
-        if (currentScreen == 1)
+        if (currentScreen == 2)
         {
             onSkip();
             Debug.Log("going in");
