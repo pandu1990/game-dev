@@ -9,12 +9,12 @@ public class Mystery : MonoBehaviour {
     GameStatus gameStatus;
 
 
-    enum MYSTERYDIRECTION{ 
+    public enum MYSTERYDIRECTION{ 
         ReverseDirection,
         SpeedUp
     };
 
-    [SerializeField] MYSTERYDIRECTION mysteryType;
+    public MYSTERYDIRECTION mysteryType;
 
     public void Start()
     {

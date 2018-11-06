@@ -15,6 +15,7 @@ public class LevelChooser : MonoBehaviour {
         thisButton = GetComponent<Button>();
         thisButton.GetComponentInChildren<Text>().text = level.ToString();
         thisButton.onClick.AddListener(delegate {
+            PlayerPrefs.SetInt("Level", level);
             SwitchLevel(level);
         });
 	}

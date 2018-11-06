@@ -18,7 +18,8 @@ public class GameStatus : MonoBehaviour {
     public void Start()
     {
         DisplayScore();
-        PlayerPrefs.SetInt("Level", level);
+        //PlayerPrefs.SetInt("Level", level);
+
     }
 
     public void addToScore(int points)

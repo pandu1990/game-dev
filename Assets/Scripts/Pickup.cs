@@ -13,6 +13,7 @@ public class Pickup : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        this.gameObject.isStatic = true;
         gameStatus = FindObjectOfType<GameStatus>();
         tmproText.text = points.ToString();
 	}
