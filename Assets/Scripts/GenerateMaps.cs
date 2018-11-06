@@ -45,7 +45,6 @@ public class GenerateMaps : MonoBehaviour {
             {
                 //check type
                 int n;
-                var obj;
                 bool isNumeric = int.TryParse(field, out n);
                 if (isNumeric) {
                     //score blocks
