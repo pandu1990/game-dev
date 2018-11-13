@@ -12,6 +12,8 @@ public class GenerateMaps : MonoBehaviour {
     public Pickup pickup;
     [SerializeField] GameObject wall;
     public Mystery mystery;
+    [SerializeField] GameObject player1;
+    [SerializeField] GameObject player2;
 
     public TextAsset[] csvFile;
 
@@ -68,6 +70,12 @@ public class GenerateMaps : MonoBehaviour {
                         case "Mystery:Speedup":
                             mystery.mysteryType = Mystery.MYSTERYDIRECTION.SpeedUp;
                             Instantiate(mystery, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
+                            break;
+                        case "Player1":
+                            Instantiate(player1, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
+                            break;
+                        case "Player2":
+                            Instantiate(player2, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
                             break;
                     }
                 }
