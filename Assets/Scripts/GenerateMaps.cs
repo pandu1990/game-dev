@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class GenerateMaps : MonoBehaviour {
 
-    [SerializeField]GameObject backgroundImg;
+    [SerializeField] GameObject backgroundImg;
+    [SerializeField] Canvas instrucationCanvas;
 
     int rowUnitNum = 0;
     int colUnitNum = 0;
@@ -30,6 +31,11 @@ public class GenerateMaps : MonoBehaviour {
         colUnitNum = Mathf.RoundToInt(bkImgWidth);
 
         int level = PlayerPrefs.GetInt("Level",1);
+
+        if(level == 1)
+        {
+            instrucationCanvas.gameObject.SetActive(true);
+        }
 
         initMap(level);
 
