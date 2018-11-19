@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+//using System;
 using UnityEngine;
 
 public class GenerateMaps : MonoBehaviour {
@@ -16,12 +17,10 @@ public class GenerateMaps : MonoBehaviour {
     [SerializeField] GameObject player2;
 
     public TextAsset[] csvFile;
+    public TextAsset InitialParam;
 
-    enum BLOCKTYPE
-    {
+    Object[,] gameObjects = new Object[20, 32];
 
-        SpeedUp
-    };
 
     // Use this for initialization
     void Start () {
@@ -29,8 +28,6 @@ public class GenerateMaps : MonoBehaviour {
         float bkImgHeight = backgroundImg.GetComponent<SpriteRenderer>().bounds.size.y;
         rowUnitNum = Mathf.RoundToInt(bkImgHeight);
         colUnitNum = Mathf.RoundToInt(bkImgWidth);
-        //rowUnitNum = Mathf.RoundToInt(bkImgWidth);
-        //colUnitNum = Mathf.RoundToInt(bkImgHeight);
 
         int level = PlayerPrefs.GetInt("Level",1);
 
@@ -48,38 +45,45 @@ public class GenerateMaps : MonoBehaviour {
             string[] fields = record.Split(',');
             foreach (string field in fields)
             {
+                Object obj=new Object();
+
                 //check type
                 int n;
                 bool isNumeric = int.TryParse(field, out n);
                 if (isNumeric) {
                     //score blocks
                     pickup.points = n;
-                    Instantiate(pickup, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
+                    obj = Instantiate(pickup, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
 
                 }
                 else{
                     switch (field.Trim()){
                         case "Wall":
                             wall.isStatic = true;
-                            Instantiate(wall, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
+                            obj = Instantiate(wall, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
                             break;
                         case "Mystery:Reverse":
                             mystery.mysteryType = Mystery.MYSTERYDIRECTION.ReverseDirection;
-                            Instantiate(mystery, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
+                            obj = Instantiate(mystery, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
                             break;
                         case "Mystery:Speedup":
                             mystery.mysteryType = Mystery.MYSTERYDIRECTION.SpeedUp;
-                            Instantiate(mystery, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
+                            obj = Instantiate(mystery, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
+                            break;
+                        case "Mystery:Disappear":
+                            mystery.mysteryType = Mystery.MYSTERYDIRECTION.Disappear;
+                            obj = Instantiate(mystery, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
                             break;
                         case "Player1":
-                            Instantiate(player1, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
+                            obj = Instantiate(player1, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
                             break;
                         case "Player2":
-                            Instantiate(player2, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
+                            obj = Instantiate(player2, new Vector3(colNo + 0.5f, rowUnitNum - rowNo - 1 + 0.5f, 0), Quaternion.identity);
                             break;
                     }
                 }
 
+                gameObjects[rowNo, colNo] = obj;
 
                 colNo++;
             }
@@ -96,6 +100,14 @@ public class GenerateMaps : MonoBehaviour {
         //pickup.points = 200;
         //Instantiate(pickup, new Vector3(2.5f, 4.5f, 0), Quaternion.identity);
 
+    }
+
+    public void removeBlocks(List<Vector2Int> Positions){
+        foreach (Vector2Int pos in Positions){
+            Debug.Log(gameObjects[pos.x, pos.y]);
+            GameObject obj=(GameObject)gameObjects[pos.x, pos.y];
+            obj.SetActive(false);
+        }
     }
 
 

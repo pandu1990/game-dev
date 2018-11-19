@@ -14,6 +14,8 @@ public class GameStatus : MonoBehaviour {
     [SerializeField] int level = 1;
     bool playerReverseDirection = false;
     bool playerSpeedUp = false;
+    bool playerDisappear = false;
+    [SerializeField] GenerateMaps generateMaps;
 
     public void Start()
     {
@@ -42,6 +44,10 @@ public class GameStatus : MonoBehaviour {
         targetText.text = "Target: \n" + targetPoints.ToString();
     }
 
+    /// <summary>
+    /// Reverses the direction.
+    /// </summary>
+
     public void ReverseDirection()
     {
         if (playerReverseDirection)
@@ -59,6 +65,10 @@ public class GameStatus : MonoBehaviour {
         return playerReverseDirection;
     }
 
+    /// <summary>
+    /// Speeds up.
+    /// </summary>
+
     public void SpeedUp()
     {
         playerSpeedUp = playerSpeedUp == true ? false : true;
@@ -67,5 +77,11 @@ public class GameStatus : MonoBehaviour {
     public bool PlayerSpeedUp()
     {
         return playerSpeedUp;
+    }
+
+    public void DisapperBlocks(){
+        List<Vector2Int> list = new List<Vector2Int>();
+        list.Add(new Vector2Int(6, 8));
+        generateMaps.removeBlocks(list);
     }
 }

@@ -46,6 +46,7 @@ public class Player : MonoBehaviour {
         int direction = gameStatus.PlayerReverseDirection() ? -1 : 1;
         int accelerate = gameStatus.PlayerSpeedUp() ? 2 : 1;
 
+
         /* var movement = new Vector2 (Input.acceleration.x, Input.acceleration.y) - startXY;
         if (movement.sqrMagnitude > 1)
         {

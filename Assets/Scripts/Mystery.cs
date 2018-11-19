@@ -11,7 +11,8 @@ public class Mystery : MonoBehaviour {
 
     public enum MYSTERYDIRECTION{ 
         ReverseDirection,
-        SpeedUp
+        SpeedUp,
+        Disappear
     };
 
     public MYSTERYDIRECTION mysteryType;
@@ -32,6 +33,12 @@ public class Mystery : MonoBehaviour {
             else if (mysteryType == MYSTERYDIRECTION.SpeedUp)
             {
                 gameStatus.SpeedUp();
+            }
+            else if (mysteryType == MYSTERYDIRECTION.Disappear)
+            {
+                //int blockPos[1,2];
+                gameStatus.DisapperBlocks();
+
             }
             Destroy(gameObject);
             picked = true;
