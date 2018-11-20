@@ -85,7 +85,9 @@ public class GameStatus : MonoBehaviour {
 
     public void DisapperBlocks(){
         List<Vector2Int> list = new List<Vector2Int>();
-        list.Add(new Vector2Int(6, 8));
+        list.Add(new Vector2Int(10, 4));
+        list.Add(new Vector2Int(9, 4));
+        list.Add(new Vector2Int(8, 4));
         generateMaps.removeBlocks(list);
     }
 
