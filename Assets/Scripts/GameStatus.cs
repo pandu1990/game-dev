@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class GameStatus : MonoBehaviour {
 
-    [SerializeField] int totalPoints = 0;
-    [SerializeField] int targetPoints = 0;
+    int totalPoints = 0;
+    int targetPoints = 0;
     [SerializeField] Text scoreText;
     [SerializeField] Text targetText;
-    [SerializeField] int level = 1;
+    //[SerializeField] int level = 1;
     bool playerReverseDirection = false;
     bool playerSpeedUp = false;
     bool playerDisappear = false;
@@ -21,6 +21,10 @@ public class GameStatus : MonoBehaviour {
     {
         DisplayScore();
         //PlayerPrefs.SetInt("Level", level);
+
+        //int level = PlayerPrefs.GetInt("Level", 1);
+        //totalPoints = generateMaps.paramDict[level].initialScores;
+        //targetPoints= generateMaps.paramDict[level].totalScores;
 
     }
 
@@ -83,5 +87,15 @@ public class GameStatus : MonoBehaviour {
         List<Vector2Int> list = new List<Vector2Int>();
         list.Add(new Vector2Int(6, 8));
         generateMaps.removeBlocks(list);
+    }
+
+    public void SetTargetScore(int score) {
+        targetPoints = score;
+        DisplayScore();
+    }
+
+    public void SetTotalPoints(int total) {
+        totalPoints = total;
+        DisplayScore();
     }
 }

@@ -20,8 +20,17 @@ public class GenerateMaps : MonoBehaviour {
     public TextAsset[] csvFile;
     public TextAsset InitialParam;
 
+    public GameStatus gameStatus;
+
     Object[,] gameObjects = new Object[20, 32];
 
+    public Dictionary<int, ParamSet> paramDict = new Dictionary<int, ParamSet>();
+
+    public class ParamSet
+    {
+        public int totalScores;
+        public int initialScores;
+    }
 
     // Use this for initialization
     void Start () {
@@ -36,6 +45,11 @@ public class GenerateMaps : MonoBehaviour {
         {
             instrucationCanvas.gameObject.SetActive(true);
         }
+
+        readInitalParamFromFile();
+        Debug.Log(paramDict[level].initialScores);
+        gameStatus.SetTotalPoints(paramDict[level].initialScores);
+        gameStatus.SetTargetScore(paramDict[level].totalScores);
 
         initMap(level);
 
@@ -116,8 +130,33 @@ public class GenerateMaps : MonoBehaviour {
         }
     }
 
+    void readInitalParamFromFile()
+    {
+        int paramNum = 3;
 
-	
+        string[] records = InitialParam.text.Split('\n');
+        for (int i = 0; i < records.Length; i+=paramNum){
+            string[] levelStr = records[i].Split(',');
+            int levelNo = int.Parse(levelStr[1]);
+
+            string[] initalScStr = records[i+1].Split(',');
+            int initalSc = int.Parse(initalScStr[1]);
+
+            string[] totalScStr = records[i+2].Split(',');
+            int totalSc = int.Parse(totalScStr[1]);
+
+
+            ParamSet paramSet = new ParamSet();
+            paramSet.initialScores = initalSc;
+            paramSet.totalScores = totalSc;
+
+            paramDict[levelNo] = paramSet;
+        }
+
+
+
+    }
+
 	// Update is called once per frame
 	void Update () {
 		
