@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 //using System;
 using UnityEngine;
+using System;
 
 public class GenerateMaps : MonoBehaviour {
 
@@ -22,7 +23,7 @@ public class GenerateMaps : MonoBehaviour {
 
     public GameStatus gameStatus;
 
-    Object[,] gameObjects = new Object[20, 32];
+    UnityEngine.Object[,] gameObjects = new UnityEngine.Object[20, 32];
 
     public Dictionary<int, ParamSet> paramDict = new Dictionary<int, ParamSet>();
 
@@ -65,7 +66,7 @@ public class GenerateMaps : MonoBehaviour {
             string[] fields = record.Split(',');
             foreach (string field in fields)
             {
-                Object obj=new Object();
+                UnityEngine.Object obj=new UnityEngine.Object();
 
                 //check type
                 int n;
@@ -102,12 +103,20 @@ public class GenerateMaps : MonoBehaviour {
                             break;
                     }
                 }
+                try{
+                    gameObjects[rowNo, colNo] = obj;
+                } catch(IndexOutOfRangeException) {
+                    Debug.Log(rowNo + " " + colNo);
+                }
 
-                gameObjects[rowNo, colNo] = obj;
+
 
                 colNo++;
             }
             rowNo++;
+            if(rowNo >= 20) {
+                break;
+            }
         }
 
 

@@ -16,6 +16,12 @@ public class Pickup : MonoBehaviour {
         this.gameObject.isStatic = true;
         gameStatus = FindObjectOfType<GameStatus>();
         tmproText.text = points.ToString();
+
+        if(points>0){
+            this.gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+            tmproText.color = Color.black;
+        }
+
 	}
 
     public void OnTriggerEnter2D(Collider2D collision) { 
